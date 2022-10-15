@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScreenSaverDisabler.Properties;
 
 namespace ScreenSaverDisabler
 {
@@ -34,8 +35,7 @@ namespace ScreenSaverDisabler
             InitializeComponent();
 
             notifyIcon.Visible = true;
-            notifyIcon.Icon = new Icon(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName +
-                                       "/icons/closed_eye.ico");
+            notifyIcon.Icon = new Icon("icons/closed_eye.ico");
 
             TrayMenuContext();
         }
@@ -54,8 +54,9 @@ namespace ScreenSaverDisabler
 
         void Eye_Click(object sender, EventArgs e)
         {
-            var button = notifyIcon.ContextMenuStrip.Items[0];
-            if (button.Text == "On")
+            var button = (ToolStripMenuItem)notifyIcon.ContextMenuStrip.Items[0];
+
+            if (!button.Checked)
             {
                 Eye(true);
                 button.Text = "Off";
@@ -74,21 +75,13 @@ namespace ScreenSaverDisabler
             if (b)
             {
                 SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
-                notifyIcon.Icon = new Icon(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName +
-                                           "/icons/opened_eye.ico");
+                notifyIcon.Icon = new Icon("icons/opened_eye.ico");
                 notifyIcon.Text = "THE WORLD SHALL KNOW PAIN!";
                 return;
             }
             SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
-            notifyIcon.Icon = new Icon(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName +
-                                       "/icons/closed_eye.ico");
+            notifyIcon.Icon = new Icon("icons/closed_eye.ico");
             notifyIcon.Text = "Im sleeping";
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
     }
 }

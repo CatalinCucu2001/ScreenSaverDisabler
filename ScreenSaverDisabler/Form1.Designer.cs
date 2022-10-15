@@ -1,4 +1,6 @@
-﻿namespace ScreenSaverDisabler
+﻿using ScreenSaverDisabler.Properties;
+
+namespace ScreenSaverDisabler
 {
     partial class Form1
     {
