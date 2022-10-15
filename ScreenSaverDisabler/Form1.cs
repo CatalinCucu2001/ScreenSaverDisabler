@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ScreenSaverDisabler
 {
-    public partial class Form1 : Form
+    public partial class Form1 : ApplicationContext
     {
         [FlagsAttribute]
         public enum EXECUTION_STATE : uint
@@ -47,7 +47,7 @@ namespace ScreenSaverDisabler
             notifyIcon.ContextMenuStrip.Items.Add("Exit", null, (sender, args) =>
             {
                 Eye(false);
-                Close();
+                Application.Exit();
                 
             });
         }
